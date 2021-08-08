@@ -1,0 +1,19 @@
+<button type="button" (click)="setHabilitar()" class="btn btn-primary my-3">{{ habilitar==true? 'Ocultar': 'Mostrar' }}</button>
+
+<div class="card">
+  <div class="card-header">
+    Listado de equipos
+  </div>
+
+  <ul class="list-group" *ngIf="habilitar == true">
+    <li class="list-group-item">Argentina</li>
+    <li class="list-group-item">Brasil</li>
+    <li class="list-group-item">Bolivia</li>
+    <li class="list-group-item">Chile</li>
+    <li class="list-group-item">Ecuador</li>
+    <li class="list-group-item">Paraguay</li>
+    <li class="list-group-item">Peru</li>
+    <li class="list-group-item">Uruguay</li>
+    <li class="list-group-item">Venezuela</li>
+  </ul>
+</div>

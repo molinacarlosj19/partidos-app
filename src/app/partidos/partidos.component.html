@@ -1,0 +1,45 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Partidos</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Partidos</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/partidos/form']">
+        Crear Partido
+      </button>
+    </div>
+    <div *ngIf="partidos?.length == 0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <table class="table table-bordered table-striped" *ngIf="partidos?.length>0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>local</th>
+          <th>visitante</th>
+          <th>resultado</th>
+          <th>fecha</th>
+          <th>
+            editar
+          </th>
+          <th>eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let partido of partidos">
+          <td>{{ partido.id }}</td>
+          <td>{{ partido.local }}</td>
+          <td>{{ partido.visitante | uppercase }}</td>
+          <td>{{ partido.resultado }}</td>
+          <td>{{ partido.createAt | date:"EEEE dd, MMMM yyyy"}}</td>
+          <td>
+            <button type="button" name="editar" [routerLink]="['/partidos/form', partido.id]" class="btn btn-primary btn-sm">editar</button>
+          </td>
+          <td>
+            <button type="button" name="eliminar" (click)='delete(partido)' class="btn btn-danger btn-sm">eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

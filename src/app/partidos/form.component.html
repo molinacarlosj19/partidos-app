@@ -1,0 +1,66 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+    {{ err }}
+  </li>
+</ul>
+
+<div class="card bg-dark text-white">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+
+    <form #partidoForm="ngForm">
+      <div class="form-group row">
+        <label for="local" class="col-form-label col-sm-2">Local</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="partido.local" name="local" #local="ngModel"> <!-- required minlength="4" -->
+          <div class="alert alert-danger" *ngIf="local.invalid && (local.dirty || local.touched)">
+            <div *ngIf="local.errors.required">
+              Local es requerido
+            </div>
+            <div *ngIf="local.errors.minlength">
+              Local debe tener al menos 4 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="visitante" class="col-form-label col-sm-2">Visitante</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="partido.visitante" name="visitante" #visitante="ngModel"> <!-- required -->
+          <div class="alert alert-danger" *ngIf="visitante.invalid && (visitante.dirty || visitante.touched)">
+            <div *ngIf="visitante.errors.required">
+              Visitante es requerido
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="resultado" class="col-form-label col-sm-2">Resultado</label>
+        <div class="col-sm-6">
+          <input type="resultado" class="form-control" [(ngModel)]="partido.resultado" name="resultado" #resultado="ngModel"> <!-- required resultado -->
+          <div class="alert alert-danger" *ngIf="resultado.invalid && (resultado.dirty || resultado.touched)">
+            <div *ngIf="resultado.errors.required">
+              Resultado es requerido
+            </div>
+            <div *ngIf="resultado.errors.resultado">
+              Resultado debe tener un formato válido
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!partido.id else elseBlock" [disabled]="!partidoForm.form.valid">Crear</button>
+
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!partidoForm.form.valid">Editar</button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
